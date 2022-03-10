@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;

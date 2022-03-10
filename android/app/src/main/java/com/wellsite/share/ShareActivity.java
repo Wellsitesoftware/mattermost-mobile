@@ -1,9 +1,9 @@
-package com.mattermost.share;
+package com.wellsite.share;
 
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
-import com.mattermost.rnbeta.MainApplication;
+import com.wellsite.meta.MainApplication;
 
 public class ShareActivity extends ReactActivity {
     @Override

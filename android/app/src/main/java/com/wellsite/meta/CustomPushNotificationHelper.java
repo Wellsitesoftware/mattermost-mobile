@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -36,7 +36,6 @@ import com.wix.reactnativenotifications.core.notification.PushNotificationProps;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

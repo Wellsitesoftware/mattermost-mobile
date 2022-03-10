@@ -345,7 +345,7 @@ export default class LoginOptions extends PureComponent {
                     <StatusBar/>
                     <Image
                         source={require('@assets/images/logo.png')}
-                        style={{height: 72, resizeMode: 'contain'}}
+                        style={{height: 40, resizeMode: 'contain'}}
                     />
                     <Text style={GlobalStyles.header}>
                         {this.props.config.SiteName}

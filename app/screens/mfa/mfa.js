@@ -148,7 +148,7 @@ export default class Mfa extends PureComponent {
                         <View style={[GlobalStyles.container, GlobalStyles.signupContainer]}>
                             <Image
                                 source={require('@assets/images/logo.png')}
-                                style={{height: 72, resizeMode: 'contain'}}
+                                style={{height: 40, resizeMode: 'contain'}}
                             />
                             <View>
                                 <FormattedText

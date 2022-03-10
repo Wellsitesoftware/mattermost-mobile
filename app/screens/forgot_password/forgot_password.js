@@ -160,7 +160,7 @@ export default class ForgotPassword extends PureComponent {
                     <View style={style.innerContainer}>
                         <Image
                             source={require('@assets/images/logo.png')}
-                            style={{height: 72, resizeMode: 'contain'}}
+                            style={{height: 40, resizeMode: 'contain'}}
                         />
                         {displayError}
                         {passwordFormView}

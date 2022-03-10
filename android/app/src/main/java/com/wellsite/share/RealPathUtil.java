@@ -1,4 +1,4 @@
-package com.mattermost.share;
+package com.wellsite.share;
 
 import android.content.Context;
 import android.database.Cursor;

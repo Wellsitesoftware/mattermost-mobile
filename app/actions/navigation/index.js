@@ -101,8 +101,8 @@ export function resetToSelectServer(allowOtherServers) {
             stack: {
                 children: [{
                     component: {
-                        id: 'SelectServer',
-                        name: 'SelectServer',
+                        id: 'mobile.routes.login',
+                        name: 'Login',
                         passProps: {
                             allowOtherServers,
                         },

@@ -10,19 +10,19 @@ import {
     Text,
     TouchableOpacity,
     View,
+    Image,
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import Config from '@assets/config';
-import CompassIcon from '@components/compass_icon';
 import FormattedText from '@components/formatted_text';
 import StatusBar from '@components/status_bar';
 import AboutLinks from '@constants/about_links';
 import {changeOpacity, makeStyleSheetFromTheme} from '@utils/theme';
 import {tryOpenURL} from '@utils/url';
 
-const MATTERMOST_BUNDLE_IDS = ['com.mattermost.rnbeta', 'com.mattermost.rn'];
+const MATTERMOST_BUNDLE_IDS = ['com.mattermost.rn', 'com.wellsite.meta'];
 
 export default class About extends PureComponent {
     static propTypes = {
@@ -134,7 +134,7 @@ export default class About extends PureComponent {
             subTitle = (
                 <FormattedText
                     id='about.enterpriseEditionSt'
-                    defaultMessage='Modern communication from behind your firewall.'
+                    defaultMessage='The digital oilfield starts here.'
                     style={style.subtitle}
                     testID='about.subtitle'
                 />
@@ -263,11 +263,15 @@ export default class About extends PureComponent {
                     testID='about.scroll_view'
                 >
                     <View style={style.logoContainer}>
-                        <CompassIcon
+                        {/* <CompassIcon
                             name='mattermost'
                             color={theme.centerChannelColor}
                             size={120}
                             testID='about.logo'
+                        /> */}
+                        <Image
+                            source={require('@assets/images/icon.png')}
+                            style={{height: 150, resizeMode: 'contain'}}
                         />
                     </View>
                     <View style={style.infoContainer}>
@@ -332,7 +336,7 @@ export default class About extends PureComponent {
                             <View style={style.footerGroup}>
                                 <FormattedText
                                     id='mobile.notice_text'
-                                    defaultMessage='Mattermost is made possible by the open source software used in our {platform} and {mobile}.'
+                                    defaultMessage='Wellsite is made possible by the open source software used in our {platform} and {mobile}.'
                                     style={style.footerText}
                                     values={{
                                         platform: (

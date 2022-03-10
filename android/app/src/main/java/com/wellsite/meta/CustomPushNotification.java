@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -18,16 +18,14 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
+import com.wellsite.react_native_interface.ResolvePromise;
 import com.wix.reactnativenotifications.core.notification.PushNotification;
 import com.wix.reactnativenotifications.core.AppLaunchHelper;
 import com.wix.reactnativenotifications.core.AppLifecycleFacade;
 import com.wix.reactnativenotifications.core.JsIOHelper;
 import static com.wix.reactnativenotifications.Defs.NOTIFICATION_RECEIVED_EVENT_NAME;
-
-import com.mattermost.react_native_interface.ResolvePromise;
 
 import org.json.JSONObject;
 

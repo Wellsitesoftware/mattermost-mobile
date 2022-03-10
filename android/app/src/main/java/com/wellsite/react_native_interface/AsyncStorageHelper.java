@@ -1,4 +1,4 @@
-package com.mattermost.react_native_interface;
+package com.wellsite.react_native_interface;
 
 import android.content.Context;
 import android.database.Cursor;

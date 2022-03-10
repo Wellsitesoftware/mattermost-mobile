@@ -1,4 +1,4 @@
-package com.mattermost.share;
+package com.wellsite.share;
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.Arguments;
-import com.mattermost.rnbeta.MainApplication;
+import com.wellsite.meta.MainApplication;
 
 import android.app.Activity;
 import android.content.Intent;

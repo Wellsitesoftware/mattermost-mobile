@@ -11,16 +11,19 @@ import {
     InteractionManager,
     Keyboard,
     StyleSheet,
-    Text,
     TextInput,
     TouchableWithoutFeedback,
     View,
+    Platform,
 } from 'react-native';
 import Button from 'react-native-button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import urlParse from 'url-parse';
 
 import {resetToChannel, goToScreen} from '@actions/navigation';
+import LocalConfig from '@assets/config';
+import {Client4} from '@client/rest';
 import ErrorText from '@components/error_text';
 import FormattedText from '@components/formatted_text';
 import StatusBar from '@components/status_bar';
@@ -28,7 +31,9 @@ import mattermostManaged from '@mattermost-managed';
 import {t} from '@utils/i18n';
 import {preventDoubleTap} from '@utils/tap';
 import {changeOpacity} from '@utils/theme';
+import {stripTrailingSlashes} from '@utils/url';
 
+import mattermostBucket from 'app/mattermost_bucket';
 import {GlobalStyles} from 'app/styles';
 
 export const mfaExpectedErrors = ['mfa.validate_token.authenticate.app_error', 'ent.mfa.validate_token.authenticate.app_error'];
@@ -38,6 +43,8 @@ export default class Login extends PureComponent {
         actions: PropTypes.shape({
             scheduleExpiredNotification: PropTypes.func.isRequired,
             login: PropTypes.func.isRequired,
+
+            // handleServerUrlChanged: PropTypes.func,
         }).isRequired,
         config: PropTypes.object.isRequired,
         license: PropTypes.object.isRequired,
@@ -59,11 +66,28 @@ export default class Login extends PureComponent {
         this.state = {
             error: null,
             isLoading: false,
+            connected: false,
+            connecting: false,
         };
     }
 
     componentDidMount() {
         this.dimensionsListener = Dimensions.addEventListener('change', this.orientationDidChange);
+
+        if (LocalConfig.ExperimentalClientSideCertEnable && Platform.OS === 'ios') {
+            RNFetchBlob.cba.selectCertificate((certificate) => {
+                if (certificate) {
+                    mattermostBucket.setPreference('cert', certificate);
+                    window.fetch = new RNFetchBlob.polyfill.Fetch({
+                        auto: true,
+                        certificate,
+                    }).build();
+                    this.pingServer('https://meta.wellsite.com');
+                }
+            });
+        } else {
+            this.pingServer('https://meta.wellsite.com');
+        }
 
         this.setEmmUsernameIfAvailable();
     }
@@ -123,9 +147,11 @@ export default class Login extends PureComponent {
         const {formatMessage} = this.context.intl;
         const license = this.props.license;
         const config = this.props.config;
-
         const loginPlaceholders = [];
         if (config.EnableSignInWithEmail === 'true') {
+            loginPlaceholders.push(formatMessage({id: 'login.email', defaultMessage: 'Email'}));
+        }
+        if (config.EnableSignInWithEmail !== 'true') {
             loginPlaceholders.push(formatMessage({id: 'login.email', defaultMessage: 'Email'}));
         }
 
@@ -133,6 +159,9 @@ export default class Login extends PureComponent {
             loginPlaceholders.push(formatMessage({id: 'login.username', defaultMessage: 'Username'}));
         }
 
+        if (config.EnableSignInWithUsername !== 'true') {
+            loginPlaceholders.push(formatMessage({id: 'login.username', defaultMessage: 'Username'}));
+        }
         if (license.IsLicensed === 'true' && license.LDAP === 'true' && config.EnableLdap === 'true') {
             if (config.LdapLoginFieldName) {
                 loginPlaceholders.push(config.LdapLoginFieldName);
@@ -252,10 +281,10 @@ export default class Login extends PureComponent {
                             defaultMessage: '',
                             values: {
                                 ldapUsername: this.props.config.LdapLoginFieldName ||
-                                this.context.intl.formatMessage({
-                                    id: 'login.ldapUsernameLower',
-                                    defaultMessage: 'AD/LDAP username',
-                                }),
+                                    this.context.intl.formatMessage({
+                                        id: 'login.ldapUsernameLower',
+                                        defaultMessage: 'AD/LDAP username',
+                                    }),
                             },
                         },
                     },
@@ -306,6 +335,100 @@ export default class Login extends PureComponent {
         }
     };
 
+    pingServer = async (url, retryWithHttp = true) => {
+        const {
+            getPing,
+
+            // handleServerUrlChanged,
+            loadConfigAndLicense,
+            setServerVersion,
+        } = this.props.actions;
+
+        this.setState({
+            connected: false,
+            connecting: true,
+            error: null,
+        });
+
+        let cancel = false;
+        this.cancelPing = () => {
+            cancel = true;
+
+            this.setState({
+                connected: false,
+                connecting: false,
+            });
+
+            this.cancelPing = null;
+        };
+
+        const serverUrl = await this.getUrl(url, !retryWithHttp);
+        Client4.setUrl(serverUrl);
+
+        //   handleServerUrlChanged(serverUrl);
+
+        try {
+            const result = await getPing();
+
+            if (cancel) {
+                return;
+            }
+
+            if (result.error && retryWithHttp) {
+                const nurl = serverUrl.replace('https:', 'http:');
+                this.pingServer(nurl, false);
+                return;
+            }
+
+            if (!result.error) {
+                loadConfigAndLicense();
+                setServerVersion(Client4.getServerVersion());
+            }
+
+            this.setState({
+                connected: !result.error,
+                connecting: false,
+                error: result.error,
+            });
+        } catch {
+            if (cancel) {
+                return;
+            }
+
+            this.setState({
+                connecting: false,
+            });
+        }
+    };
+
+    getUrl = async (serverUrl, useHttp = false) => {
+        let url = this.sanitizeUrl(serverUrl, useHttp);
+
+        try {
+            const resp = await fetch(url, {method: 'HEAD'});
+            if (resp?.rnfbRespInfo?.redirects?.length) {
+                url = resp.rnfbRespInfo.redirects[resp.rnfbRespInfo.redirects.length - 1];
+            }
+        } catch {
+            // do nothing
+        }
+
+        return this.sanitizeUrl(url, useHttp);
+    };
+
+    sanitizeUrl = (url, useHttp = false) => {
+        let preUrl = urlParse(url, true);
+
+        if (!preUrl.host || preUrl.protocol === 'file:') {
+            preUrl = urlParse('https://' + stripTrailingSlashes(url), true);
+        }
+
+        if (preUrl.protocol === 'http:' && !useHttp) {
+            preUrl.protocol = 'https:';
+        }
+        return stripTrailingSlashes(preUrl.protocol + '//' + preUrl.host + preUrl.pathname);
+    };
+
     render() {
         const {isLoading} = this.state;
 
@@ -347,7 +470,7 @@ export default class Login extends PureComponent {
         }
 
         let forgotPassword;
-        if (this.props.config.EnableSignInWithEmail === 'true' || this.props.config.EnableSignInWithUsername === 'true') {
+        if (this.props.config.EnableSignInWithEmail === 'true' || this.props.config.EnableSignInWithUsername === 'true' || this.props.config.EnableSignInWithEmail !== 'true' || this.props.config.EnableSignInWithUsername !== 'true') {
             forgotPassword = (
                 <Button
                     onPress={this.forgotPassword}
@@ -378,16 +501,16 @@ export default class Login extends PureComponent {
                     >
                         <Image
                             source={require('@assets/images/logo.png')}
-                            style={{height: 72, resizeMode: 'contain'}}
+                            style={{height: 40, resizeMode: 'contain', marginBottom: 25}}
                         />
                         <View testID='login.screen'>
-                            <Text style={GlobalStyles.header}>
+                            {/* <Text style={GlobalStyles.header}>
                                 {this.props.config.SiteName}
-                            </Text>
+                            </Text> */}
                             <FormattedText
                                 style={GlobalStyles.subheader}
                                 id='web.root.signup_info'
-                                defaultMessage='All team communication in one place, searchable and accessible anywhere'
+                                defaultMessage='The future of work in oil & gas'
                             />
                         </View>
                         <ErrorText

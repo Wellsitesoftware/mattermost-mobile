@@ -2,16 +2,16 @@
 // See LICENSE.txt for license information.
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 
-import CompassIcon from '@components/compass_icon';
-import {ViewTypes} from '@constants';
+//import CompassIcon from '@components/compass_icon';
+//import {ViewTypes} from '@constants';
 
-import type {Theme} from '@mm-redux/types/theme';
+//import type {Theme} from '@mm-redux/types/theme';
 
-type Props = {
-    theme: Theme;
-}
+// type Props = {
+//     theme: Theme;
+// }
 
 const styles = StyleSheet.create({
     profilePictureContainer: {
@@ -22,13 +22,18 @@ const styles = StyleSheet.create({
     },
 });
 
-const SystemAvatar = ({theme}: Props) => {
+const SystemAvatar = () => {
     return (
         <View style={styles.profilePictureContainer}>
-            <CompassIcon
+            {/* <CompassIcon
                 name='mattermost'
                 color={theme.centerChannelColor}
                 size={ViewTypes.PROFILE_PICTURE_SIZE}
+            /> */}
+
+            <Image
+                source={require('@assets/images/icon.png')}
+                style={{height: 40, width: 40, resizeMode: 'contain'}}
             />
         </View>
     );

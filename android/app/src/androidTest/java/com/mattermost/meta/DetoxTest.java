@@ -1,5 +1,6 @@
-package com.mattermost.rnbeta;
+package com.mattermost.meta;
 
+import com.wellsite.meta.MainActivity;
 import com.wix.detox.Detox;
 
 import org.junit.Rule;

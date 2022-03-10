@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import android.app.Activity;
 import android.content.Context;

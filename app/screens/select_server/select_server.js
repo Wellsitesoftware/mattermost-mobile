@@ -180,7 +180,6 @@ export default class SelectServer extends PureComponent {
 
     handleConnect = preventDoubleTap(async () => {
         Keyboard.dismiss();
-
         if (this.state.connecting || this.state.connected) {
             this.cancelPing();
 
@@ -481,7 +480,7 @@ export default class SelectServer extends PureComponent {
                         <View style={[GlobalStyles.container, GlobalStyles.signupContainer]}>
                             <Image
                                 source={require('@assets/images/logo.png')}
-                                style={{height: 72, resizeMode: 'contain'}}
+                                style={{height: 40, resizeMode: 'contain'}}
                             />
 
                             <View testID='select_server.header.text'>

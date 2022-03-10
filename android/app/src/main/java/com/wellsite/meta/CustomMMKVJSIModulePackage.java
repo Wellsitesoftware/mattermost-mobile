@@ -1,6 +1,5 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
-import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.react.bridge.JSIModuleSpec;
 import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.ReactApplicationContext;

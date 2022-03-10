@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import org.json.JSONException;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
 
-import com.mattermost.react_native_interface.ResolvePromise;
+import com.wellsite.react_native_interface.ResolvePromise;
 
 public class ReceiptDelivery {
     private static final int[] FIBONACCI_BACKOFF = new int[] { 0, 1, 2, 3, 5, 8 };

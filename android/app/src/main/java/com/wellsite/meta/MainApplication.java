@@ -1,4 +1,4 @@
-package com.mattermost.rnbeta;
+package com.wellsite.meta;
 
 import android.content.Context;
 import android.content.RestrictionsManager;
@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mattermost.share.RealPathUtil;
-import com.mattermost.share.ShareModule;
+import com.wellsite.share.RealPathUtil;
+import com.wellsite.share.ShareModule;
 import com.wix.reactnativenotifications.RNNotificationsPackage;
 
 import com.reactnativenavigation.NavigationApplication;
@@ -79,10 +79,10 @@ private final ReactNativeHost mReactNativeHost =
               public ReactModuleInfoProvider getReactModuleInfoProvider() {
                 return () -> {
                   Map<String, ReactModuleInfo> map = new HashMap<>();
-                  map.put("MattermostManaged", new ReactModuleInfo("MattermostManaged", "com.mattermost.rnbeta.MattermostManagedModule", false, false, false, false, false));
-                  map.put("MattermostShare", new ReactModuleInfo("MattermostShare", "com.mattermost.share.ShareModule", false, false, true, false, false));
-                  map.put("NotificationPreferences", new ReactModuleInfo("NotificationPreferences", "com.mattermost.rnbeta.NotificationPreferencesModule", false, false, false, false, false));
-                  map.put("RNTextInputReset", new ReactModuleInfo("RNTextInputReset", "com.mattermost.rnbeta.RNTextInputResetModule", false, false, false, false, false));
+                  map.put("MattermostManaged", new ReactModuleInfo("MattermostManaged", "com.wellsite.meta.MattermostManagedModule", false, false, false, false, false));
+                  map.put("MattermostShare", new ReactModuleInfo("MattermostShare", "ShareModule", false, false, true, false, false));
+                  map.put("NotificationPreferences", new ReactModuleInfo("NotificationPreferences", "com.wellsite.meta.NotificationPreferencesModule", false, false, false, false, false));
+                  map.put("RNTextInputReset", new ReactModuleInfo("RNTextInputReset", "com.wellsite.meta.RNTextInputResetModule", false, false, false, false, false));
                   return map;
                 };
               }

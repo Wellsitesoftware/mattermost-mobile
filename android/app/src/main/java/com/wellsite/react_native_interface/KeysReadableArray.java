@@ -1,4 +1,4 @@
-package com.mattermost.react_native_interface;
+package com.wellsite.react_native_interface;
 
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
