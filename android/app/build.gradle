@@ -131,7 +131,7 @@ android {
         applicationId "com.wellsite.meta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         multiDexEnabled = true
         testBuildType System.getProperty('testBuildType', 'debug')
@@ -157,6 +157,7 @@ android {
     }
     buildTypes {
         release {
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release

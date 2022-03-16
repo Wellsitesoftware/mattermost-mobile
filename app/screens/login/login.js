@@ -72,6 +72,8 @@ export default class Login extends PureComponent {
     }
 
     componentDidMount() {
+        console.warn("Login Url", Client4.getUrl())
+
         this.dimensionsListener = Dimensions.addEventListener('change', this.orientationDidChange);
 
         if (LocalConfig.ExperimentalClientSideCertEnable && Platform.OS === 'ios') {
@@ -84,7 +86,7 @@ export default class Login extends PureComponent {
                     }).build();
                     this.pingServer('https://meta.wellsite.com');
                 }
-            });
+            });                             
         } else {
             this.pingServer('https://meta.wellsite.com');
         }
@@ -108,8 +110,9 @@ export default class Login extends PureComponent {
         const title = intl.formatMessage({id: 'mobile.routes.mfa', defaultMessage: 'Multi-factor Authentication'});
         const loginId = this.loginId;
         const password = this.password;
-
         goToScreen(screen, title, {goToChannel: this.goToChannel, loginId, password});
+        console.warn("Token s===>>>", Client4.getToken())
+
     };
 
     blur = () => {
@@ -187,6 +190,8 @@ export default class Login extends PureComponent {
         const title = intl.formatMessage({id: 'password_form.title', defaultMessage: 'Password Reset'});
 
         goToScreen(screen, title);
+        console.warn("Token s===>>>22", Client4.getToken())
+
     };
 
     getLoginErrorMessage = (error) => {
@@ -326,10 +331,13 @@ export default class Login extends PureComponent {
 
     signIn = async () => {
         const {actions} = this.props;
+        console.log("signin1",actions)  // 99
         const {isLoading} = this.state;
         if (isLoading) {
             const result = await actions.login(this.loginId.toLowerCase(), this.password);
-            if (this.checkLoginResponse(result)) {
+            if (this.checkLoginResponse(result))
+            console.log("checklogRes",result)
+            {
                 this.goToChannel();
             }
         }
@@ -505,7 +513,7 @@ export default class Login extends PureComponent {
                         />
                         <View testID='login.screen'>
                             {/* <Text style={GlobalStyles.header}>
-                                {this.props.config.SiteName}
+                                {this.props.config.SiteName} 99
                             </Text> */}
                             <FormattedText
                                 style={GlobalStyles.subheader}

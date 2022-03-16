@@ -72,7 +72,7 @@ export const apiGetClientLicense = async () => {
 export const apiGetConfig = async () => {
     try {
         const response = await client.get('/api/v4/config');
-
+        
         return {config: response.data};
     } catch (err) {
         return getResponseFromError(err);
@@ -160,8 +160,9 @@ export const apiUpdateConfig = async (newConfig = {}) => {
             '/api/v4/config',
             config,
         );
-
+          console.log("hahah",response.data)
         return {config: response.data};
+    
     } catch (err) {
         return getResponseFromError(err);
     }

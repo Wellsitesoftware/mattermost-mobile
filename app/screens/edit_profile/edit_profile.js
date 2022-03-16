@@ -135,6 +135,7 @@ export default class EditProfile extends PureComponent {
 
     componentDidMount() {
         this.navigationEventListener = Navigation.events().bindComponent(this);
+        console.warn('Token s===>>>33', Client4.getToken());
     }
 
     navigationButtonPressed({buttonId}) {
