@@ -195,7 +195,7 @@
     "i18n-clean-empty": "npm run mmjstool -- i18n clean-empty --mobile-dir .",
     "e2e:android": "cd detox && npm run e2e:android-build && npm run e2e:android-test && cd ..",
     "e2e:ios": "cd detox && npm run e2e:ios-test && cd ..",
-    "build:ios": "./scripts/build.sh ipa",
+    "build:ios": "react-native bundle --platform ios --assets-dest iOS/assets --dev false --entry-file index.js --bundle-output iOS/main.jsbundle",
     "build:ios-unsigned": "./scripts/build.sh ipa unsigned",
     "build:ios-sim": "./scripts/build.sh ipa simulator",
     "build:android": "./scripts/build.sh apk",

@@ -517,8 +517,8 @@ export default class Login extends PureComponent {
                             </Text> */}
                             <FormattedText
                                 style={GlobalStyles.subheader}
-                                id='web.root.signup_info'
-                                defaultMessage='The future of work in oil & gas'
+                                id='web.root.signup_info2'
+                                defaultMessage='Powering the people that power the oilfield'
                             />
                         </View>
                         <ErrorText

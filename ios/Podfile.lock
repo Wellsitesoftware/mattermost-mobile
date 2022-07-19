@@ -27,7 +27,7 @@ PODS:
   - libwebp/webp (1.2.1)
   - MMKV (1.2.10):
     - MMKVCore (~> 1.2.10)
-  - MMKVCore (1.2.12)
+  - MMKVCore (1.2.13)
   - Permission-Camera (3.2.0):
     - RNPermissions
   - Permission-MediaLibrary (3.2.0):
@@ -420,7 +420,7 @@ PODS:
     - Yoga
   - RNRudderSdk (1.0.0):
     - React
-    - Rudder (>= 1.2.1)
+    - Rudder (~> 1.6.0)
   - RNScreens (3.10.2):
     - React-Core
     - React-RCTImage
@@ -433,11 +433,11 @@ PODS:
     - React
   - RNVectorIcons (9.0.0):
     - React-Core
-  - Rudder (1.5.2)
-  - SDWebImage (5.12.3):
-    - SDWebImage/Core (= 5.12.3)
-  - SDWebImage/Core (5.12.3)
-  - SDWebImageWebPCoder (0.8.4):
+  - Rudder (1.6.2)
+  - SDWebImage (5.12.6):
+    - SDWebImage/Core (= 5.12.6)
+  - SDWebImage/Core (5.12.6)
+  - SDWebImageWebPCoder (0.8.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - Sentry (7.9.0):
@@ -524,7 +524,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - "RNRudderSdk (from `../node_modules/@rudderstack/rudder-sdk-react-native/ios`)"
+  - "RNRudderSdk (from `../node_modules/@rudderstack/rudder-sdk-react-native`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNShare (from `../node_modules/react-native-share`)
@@ -696,7 +696,7 @@ EXTERNAL SOURCES:
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNRudderSdk:
-    :path: "../node_modules/@rudderstack/rudder-sdk-react-native/ios"
+    :path: "../node_modules/@rudderstack/rudder-sdk-react-native"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSentry:
@@ -731,7 +731,7 @@ SPEC CHECKSUMS:
   jail-monkey: 07b83767601a373db876e939b8dbf3f5eb15f073
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   MMKV: 76033b9ace2006623308910a3afcc0e25eba3140
-  MMKVCore: df0565f6b58463604731a68ba6cd89bc0b2d1d55
+  MMKVCore: 3388952ded307e41b3ed8a05892736a236ed1b8e
   Permission-Camera: 53efcbb755b0e8bdf253dbb27cc7559ccfce8480
   Permission-MediaLibrary: d35adbe2a069f2e16121fd79cf15959e86a3f74a
   Permission-Microphone: db557c64f7e9ad41bff6b3f6d93df3b67311855b
@@ -798,15 +798,15 @@ SPEC CHECKSUMS:
   RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
   RNReactNativeHapticFeedback: b83bfb4b537bdd78eb4f6ffe63c6884f7b049ead
   RNReanimated: 1326679461fa5d2399d54c18ca1432ba3e816b9e
-  RNRudderSdk: 1a629f815632d62459ea1add0fd4e853598d34a5
+  RNRudderSdk: 14c176adb1557f3832cb385fcd14250f76a7e268
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   RNSentry: 0aa1567f66c20390f3834637fc4f73380dcd0774
   RNShare: 571c863ce31152bee8396f7b17723d63bcfcbc63
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
-  Rudder: 557cc105d77f365821d78403b1abacfd2e3018de
-  SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
-  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
+  Rudder: 4c3c00d9b45ccdf3330d9c7de5e84dd5acaebcd1
+  SDWebImage: a47aea9e3d8816015db4e523daff50cfd294499d
+  SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Sentry: 2f7e91f247cfb05b05bd01e0b5d0692557a7687b
   Swime: d7b2c277503b6cea317774aedc2dce05613f8b0b
   XCDYouTubeKit: b120aced3d8638ffb570c5450cddb5a1dac448c7

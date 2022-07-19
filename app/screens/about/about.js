@@ -282,9 +282,9 @@ export default class About extends PureComponent {
                             >
                                 {`${config.SiteName} `}
                             </Text>
-                            {title}
+                            {/* {title} */}
                         </View>
-                        {subTitle}
+                        {/* {subTitle} */}
                         <FormattedText
                             id='mobile.about.appVersion'
                             defaultMessage='App Version: {version} (Build {number})'
@@ -306,7 +306,7 @@ export default class About extends PureComponent {
                             testID='about.database'
                         />
                         {licensee}
-                        {learnMore}
+                        {/* {learnMore} */}
                         {!MATTERMOST_BUNDLE_IDS.includes(DeviceInfo.getBundleId()) &&
                             <FormattedText
                                 id='mobile.about.powered_by'
@@ -318,6 +318,7 @@ export default class About extends PureComponent {
                                 testID='about.powered_by'
                             />
                         }
+                        <View style={{height:15}}></View>
                         <FormattedText
                             id='mobile.about.copyright'
                             defaultMessage='Copyright 2015-{currentYear} Mattermost, Inc. All rights reserved'
@@ -333,7 +334,7 @@ export default class About extends PureComponent {
                             {privacyPolicy}
                         </View>
                         <View style={style.noticeContainer}>
-                            <View style={style.footerGroup}>
+                            {/* <View style={style.footerGroup}>
                                 <FormattedText
                                     id='mobile.notice_text'
                                     defaultMessage='Wellsite is made possible by the open source software used in our {platform} and {mobile}.'
@@ -358,7 +359,7 @@ export default class About extends PureComponent {
                                     }}
                                     testID='about.notice_text'
                                 />
-                            </View>
+                            </View> */}
                         </View>
                         <View style={style.hashContainer}>
                             <View style={style.footerGroup}>
