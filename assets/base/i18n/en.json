@@ -777,5 +777,6 @@
   "user.settings.push_notification.disabled_long": "Push notifications have not been enabled by your System Administrator.",
   "user.settings.push_notification.offline": "Offline",
   "user.settings.push_notification.online": "Online, away or offline",
-  "web.root.signup_info": "The future of work in oil & gas"
+  "web.root.signup_info": "The future of work in oil & gas",
+  "web.root.signup_info2":"Powering the people that power the oilfield"
 }
