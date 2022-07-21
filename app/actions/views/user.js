@@ -23,7 +23,9 @@ import {getDeviceTimezone} from '@utils/timezone';
 
 const HTTP_UNAUTHORIZED = 401;
 
-export function completeLogin(user, deviceToken) {
+export function completeLogin(user, deviceToken) 
+
+{
     return async (dispatch, getState) => {
         const state = getState();
         const license = getLicense(state);
@@ -31,7 +33,7 @@ export function completeLogin(user, deviceToken) {
         const url = Client4.getUrl();
 
         setAppCredentials(deviceToken, user.id, token, url);
-
+    //    console.log("devicetoken1",deviceToken)
         // Set timezone
         const enableTimezone = isTimezoneEnabled(state);
         if (enableTimezone) {
@@ -76,7 +78,9 @@ export function getMe() {
     };
 }
 
-export function loadMe(user, deviceToken, skipDispatch = false) {
+export function loadMe(user, deviceToken, skipDispatch = false)
+
+{
     return async (dispatch, getState) => {
         const state = getState();
         const data = {user};

@@ -30,6 +30,7 @@ export function handleSuccessfulLogin() {
 
         await setCSRFFromCookie(url);
         setAppCredentials(deviceToken, currentUserId, token, url);
+        // console.log("devicetoken11",deviceToken)
 
         const enableTimezone = isTimezoneEnabled(state);
         if (enableTimezone) {

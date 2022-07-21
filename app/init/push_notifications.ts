@@ -257,6 +257,7 @@ class PushNotifications {
     onRemoteNotificationsRegistered = (event: Registered) => {
         if (!this.configured) {
             const {deviceToken} = event;
+            // console.log("devicett1234",deviceToken)
             let prefix;
 
             if (Platform.OS === 'ios') {
